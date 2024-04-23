@@ -2,6 +2,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import Cors from 'cors'
 import Cards from './dbCards.js'
+import Blocks from './blocks.js'
+import Favorites from './favorites.js'
 const ObjectId = mongoose.Types.ObjectId;
 
 //App Config
@@ -37,6 +39,16 @@ app.get("/", (req, res) => res.status(200).send("Hello TheWebDev"))
 app.post('/dating/cards', async(req, res) => {
     const dbCard = new Cards(req.body);
     dbCard.save();
+    res.status(201).send();
+})
+app.post('/dating/favorites', async(req, res) => {
+    const favorite = new Favorites(req.body);
+    favorite.save();
+    res.status(201).send();
+})
+app.post('/dating/blocks', async(req, res) => {
+    const block = new Blocks(req.body);
+    block.save();
     res.status(201).send();
 })
 
