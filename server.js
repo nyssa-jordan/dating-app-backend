@@ -67,5 +67,35 @@ app.get('/dating/cards', async(req, res) => {
 
     }
 })
+
+app.get('/dating/favorites', async(req, res) => {
+    let favorite;
+    var o = getJSONObject(req);
+    favorite = await Favorites.find()
+    if (favorite.length > 0) {
+        o.status = 200;
+        o.message = "GET favs";
+        o.favorite = favorite;
+        o.headers = req.headers;
+        o.query = req.query;
+        res.json(o);
+
+    }
+})
+
+app.get('/dating/blocks', async(req, res) => {
+    let block;
+    var o = getJSONObject(req);
+    block = await Blocks.find()
+    if (block.length > 0) {
+        o.status = 200;
+        o.message = "GET blocks";
+        o.block = block;
+        o.headers = req.headers;
+        o.query = req.query;
+        res.json(o);
+
+    }
+})
 //Listener
 app.listen(port, () => console.log(`Listening on localhost: ${port}`))
